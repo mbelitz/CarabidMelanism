@@ -1,4 +1,4 @@
-Repository of data and code to reproduce analyses and figures for Sheldon et al. manuscript testing hypotheses in relation to patterns of carabid melanism using NEON pitfall specimen.
+Repository of data and code to reproduce analyses and figures for manuscript testing hypotheses in relation to patterns of carabid melanism using NEON pitfall specimen.
 
 ## data
 Subdirectory of where the data for analysis is stored.
