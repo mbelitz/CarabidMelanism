@@ -1,11 +1,3 @@
-# =============================================================================
-# HSV SENSITIVITY ANALYSIS
-# Tests whether RGB-derived lightness is a reliable proxy for melanin by
-# examining: (1) correlation between mean RGB and HSV Value (brightness),
-# and (2) distribution of HSV Saturation to flag structurally-coloured specimens
-# High saturation indicates structural/iridescent colour rather than pigment
-# =============================================================================
-
 library(tidyverse)
 
 # --- RGB to HSV conversion ---
@@ -71,8 +63,18 @@ melanism_hsv <- select(melanism_hsv, ave_melanism_dorsal, ave_melanism_ventral,
 
 write.csv(x = melanism_hsv, 'data/melanism_HSV.csv')
 
+
 ## plot
 library(ggrepel)
+
+species_hsv <- melanism_hsv %>% 
+  group_by(SpeciesName) %>% 
+  summarise(mean_S_dorsal = mean(HSV_S_dorsal),
+            mean_S_ventral = mean(HSV_S_ventral),
+            mean_V_dorsal = mean(HSV_V_dorsal),
+            mean_V_ventral = mean(HSV_V_ventral),
+            mean_H_dorsal = mean(HSV_H_dorsal),
+            mean_H_ventral = mean(HSV_H_ventral))
 
 p_S_V <- ggplot(species_hsv, aes(x = mean_S_dorsal, y = mean_V_dorsal)) +
   geom_point(size = 2.5) +
@@ -98,6 +100,8 @@ ggsave("figureOutputs/dorsal_S_vs_V_labelled.png",
 
 ###
 
+cor(species_hsv$mean_V_dorsal, species_hsv$mean_S_dorsal)
+
 p_S_V_ventral <- ggplot(species_hsv, aes(x = mean_S_ventral, y = mean_V_ventral)) +
   geom_point(size = 2.5) +
   geom_smooth(method = "lm", se = TRUE, color = "grey40", 
@@ -112,8 +116,8 @@ p_S_V_ventral <- ggplot(species_hsv, aes(x = mean_S_ventral, y = mean_V_ventral)
     aes(label = SpeciesName),
     size = 2.8, fontface = "italic",
     box.padding = 0.4, max.overlaps = 20) +
-  labs(x = "Mean Saturation (dorsal)", 
-       y = "Mean Value / Brightness (dorsal)") +
+  labs(x = "Mean Saturation (ventral)", 
+       y = "Mean Value / Brightness (ventral)") +
   theme_classic() +
   theme(axis.text       = element_text(size = 11),
         axis.title      = element_text(size = 12),
@@ -125,4 +129,4 @@ p_S_V_ventral <- ggplot(species_hsv, aes(x = mean_S_ventral, y = mean_V_ventral)
 p_S_V_ventral
 
 ggsave("figureOutputs/ventral_S_vs_V_labelled.png",
-       p_S_V, dpi = 450, width = 9, height = 7)
+       p_S_V_ventral, dpi = 450, width = 9, height = 7)
