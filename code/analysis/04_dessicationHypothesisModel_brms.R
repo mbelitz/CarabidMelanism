@@ -484,12 +484,12 @@ p_int_v <- ggplot(int_ce_plot_v,
   geom_ribbon(aes(ymin = lower__, ymax = upper__), alpha = 0.30, color = NA) +
   geom_line() +
   geom_point(data = mdf,
-             aes(x = meanSoilMoisture, y = HSV_V_dorsal),
+             aes(x = meanSoilMoisture, y = HSV_V_ventral),
              inherit.aes = FALSE, alpha = 0.08,
              position = position_jitter(width = 0.05, seed = 1)) +
   scale_color_manual(values = size_colors) +
   scale_fill_manual(values  = size_colors) +
-  labs(x = "Soil moisture", y = "Dorsal brightness",
+  labs(x = "Soil moisture", y = "Ventral brightness",
        color = "Body size", fill = "Body size") +
   theme_classic() +
   theme(legend.position = c(0.25, 0.90),
