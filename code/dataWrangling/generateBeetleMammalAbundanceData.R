@@ -9,7 +9,7 @@ mammals <- mammals %>%
   mutate(year = isoyear(observation_datetime))
 
 # Read in Elton Traits
-traits <- read.table("C:/Users/sydne.record/Dropbox/NEON_RCN/MamFuncDat.txt", stringsAsFactors=FALSE, fill=TRUE, header=TRUE)
+traits <- read.table("data/MamFuncDat.txt", stringsAsFactors=FALSE, fill=TRUE, header=TRUE)
 traits <- tibble(traits)
 traits <- traits %>%
   mutate(taxon_name = str_c(Scientific, MSWFamilyLatin, sep=' '))
