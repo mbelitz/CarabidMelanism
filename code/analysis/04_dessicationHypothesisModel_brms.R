@@ -178,7 +178,7 @@ cat(sprintf("Pagel's lambda = %.4f,  p = %.4f (LRT vs lambda = 0)\n",
 # Variance partitioning across these terms yields a Pagel's lambda analog:
 #   lambda ~ phylo_var / (phylo_var + all other variances)
 #
-# NOTE on priors: intercept prior normal(130, 40) assumes RGB brightness on a
+# NOTE on priors: intercept prior normal(130, 40) assumes RGB lightness on a
 # 0-255 scale. If Blair et al.'s FIJI output is 0-1 normalised, change to
 # normal(0.5, 0.2) and slope prior to normal(0, 0.1).
 # =============================================================================
@@ -191,7 +191,7 @@ bayes_priors <- c(
 )
 
 # --- DORSAL model ---
-cat("\nFitting Bayesian phylogenetic mixed model: DORSAL brightness...\n")
+cat("\nFitting Bayesian phylogenetic mixed model: DORSAL lightness...\n")
 
 bayes_dorsal <- brm(
   formula = HSV_V_dorsal ~
@@ -221,7 +221,7 @@ print(summary(bayes_dorsal))
 pp_check(bayes_dorsal, ndraws = 100)
 
 # --- VENTRAL model ---
-cat("\nFitting Bayesian phylogenetic mixed model: VENTRAL brightness...\n")
+cat("\nFitting Bayesian phylogenetic mixed model: VENTRAL lightness...\n")
 
 bayes_ventral <- brm(
   formula = HSV_V_ventral ~
@@ -374,7 +374,7 @@ p_bs <- ggplot(bs_ce, aes(x = MajorAxis_Dorsal, y = estimate__)) +
   geom_line(color = "black") +
   geom_point(data = mdf, aes(x = MajorAxis_Dorsal, y = HSV_V_dorsal),
              alpha = 0.08) +
-  labs(x = "Body size", y = "Dorsal brightness") +
+  labs(x = "Body size", y = "Dorsal lightness") +
   theme_classic() +
   theme(axis.text = element_text(size = 13),
         axis.title = element_text(size = 14))
@@ -402,7 +402,7 @@ p_vpd <- ggplot(int_ce_plot,
              position = position_jitter(width = 0.05, seed = 1)) +
   scale_color_manual(values = size_colors) +
   scale_fill_manual(values  = size_colors) +
-  labs(x = "Vapour pressure deficit", y = "Dorsal brightness",
+  labs(x = "Vapour pressure deficit", y = "Dorsal lightness",
        color = "Body size", fill = "Body size") +
   theme_classic() +
   theme(legend.position = c(0.25, 0.87),
@@ -415,7 +415,7 @@ p_msm <- ggplot(msm_ce, aes(x = meanSoilMoisture, y = estimate__)) +
   geom_line(color = "black") +
   geom_point(data = mdf, aes(x = meanSoilMoisture, y = HSV_V_dorsal),
              alpha = 0.08, position = position_jitter(width = 0.05, seed = 1)) +
-  labs(x = "Soil moisture", y = "Dorsal brightness") +
+  labs(x = "Soil moisture", y = "Dorsal lightness") +
   theme_classic() +
   theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
 
@@ -424,7 +424,7 @@ p_ap <- ggplot(ap_ce, aes(x = AnnualPrecipitation, y = estimate__)) +
   geom_line(color = "black") +
   geom_point(data = mdf, aes(x = AnnualPrecipitation, y = HSV_V_dorsal),
              alpha = 0.08, position = position_jitter(width = 0.05, seed = 1)) +
-  labs(x = "Annual precipitation", y = "Dorsal brightness") +
+  labs(x = "Annual precipitation", y = "Dorsal lightness") +
   theme_classic() +
   theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
 
@@ -445,7 +445,7 @@ p_bs_v <- ggplot(bs_ce_v, aes(x = MajorAxis_Dorsal, y = estimate__)) +
   geom_line(color = "black") +
   geom_point(data = mdf, aes(x = MajorAxis_Dorsal, y = HSV_V_ventral),
              alpha = 0.08) +
-  labs(x = "Body size", y = "Ventral brightness") +
+  labs(x = "Body size", y = "Ventral lightness") +
   theme_classic() +
   theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
 
@@ -454,7 +454,7 @@ p_ap_v <- ggplot(ap_ce_v, aes(x = AnnualPrecipitation, y = estimate__)) +
   geom_line(color = "black") +
   geom_point(data = mdf, aes(x = AnnualPrecipitation, y = HSV_V_ventral),
              alpha = 0.08, position = position_jitter(width = 0.05, seed = 1)) +
-  labs(x = "Annual precipitation", y = "Ventral brightness") +
+  labs(x = "Annual precipitation", y = "Ventral lightness") +
   theme_classic() +
   theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
 
@@ -463,7 +463,7 @@ p_msm_v <- ggplot(msm_ce_v, aes(x = meanSoilMoisture, y = estimate__)) +
   geom_line(color = "black") +
   geom_point(data = mdf, aes(x = meanSoilMoisture, y = HSV_V_ventral),
              alpha = 0.08, position = position_jitter(width = 0.05, seed = 1)) +
-  labs(x = "Soil moisture", y = "Ventral brightness") +
+  labs(x = "Soil moisture", y = "Ventral lightness") +
   theme_classic() +
   theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
 
@@ -490,7 +490,7 @@ p_int_v <- ggplot(int_ce_plot_v,
              position = position_jitter(width = 0.05, seed = 1)) +
   scale_color_manual(values = size_colors) +
   scale_fill_manual(values  = size_colors) +
-  labs(x = "Soil moisture", y = "Ventral brightness",
+  labs(x = "Soil moisture", y = "Ventral lightness",
        color = "Body size", fill = "Body size") +
   theme_classic() +
   theme(legend.position = c(0.25, 0.90),
