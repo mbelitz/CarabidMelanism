@@ -7,7 +7,6 @@ library(sjPlot)
 
 ## read in melanism data
 mel<-read.csv("data/melanism_modelDF.csv", header=TRUE) # data from Katie
-mel <- filter(mel, Habit == "nocturnal")
 
 ## read in covariates
 meanSoilMoisture <- read.csv("data/covariatesOutputs/meanSoilMoisture.csv") %>% 
@@ -82,14 +81,14 @@ m <- select(mel6, AnnualPrecipitation, MajorAxis_Dorsal,
 m <- m %>% 
   rename(BodySize = MajorAxis_Dorsal,
          #BeetleAbundance = beetleAbundance,
-         SoilTemp = meanSoilTemp,
+         #SoilTemp = meanSoilTemp,
          MammalAbundance = mammalAbundance,
          SoilMoisture = meanSoilMoisture,
          VPD = meanVPD,
          #SolarRadiation = rsds,
          #AnnualTemp = MAT
          ) %>% 
-  select(-rsds,-MAT,-beetleAbundance)
+  select(-rsds,-MAT,-beetleAbundance, -meanSoilTemp)
 
 library(corrplot)
 M = cor(m)
