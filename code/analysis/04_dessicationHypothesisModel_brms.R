@@ -35,7 +35,7 @@ tree <- read.tree("data/Tree.DNA.droppedseqs.newick")
 # --- Reduce trinomial subspecies names to binomial species names ---
 # Leaves binomials unchanged; strips third epithet from any trinomials.
 # Five subspecies in mdf (e.g. "Bembidion quadrimaculatum oppositum") are
-# matched to their nominal species in the phylogeny. This is noted in methods.
+# matched to their nominal species in the phylogeny. 
 strip_subspecies <- function(x) {
   words <- str_split(x, " ")
   map_chr(words, ~ if (length(.x) >= 3) paste(.x[1], .x[2]) else paste(.x, collapse = " "))
@@ -376,7 +376,8 @@ p_bs <- ggplot(bs_ce, aes(x = MajorAxis_Dorsal, y = estimate__)) +
              alpha = 0.08) +
   labs(x = "Body size", y = "Dorsal brightness") +
   theme_classic() +
-  theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
+  theme(axis.text = element_text(size = 13),
+        axis.title = element_text(size = 14))
 
 int_ce_plot <- int_ce %>%
   filter(effect2__ %in% c(-1, 0, 1)) %>%           # keep only the three focal body sizes
@@ -404,10 +405,10 @@ p_vpd <- ggplot(int_ce_plot,
   labs(x = "Vapour pressure deficit", y = "Dorsal brightness",
        color = "Body size", fill = "Body size") +
   theme_classic() +
-  theme(legend.position = c(0.25, 0.90),
-        legend.text     = element_text(size = 9),
-        axis.text       = element_text(size = 12),
-        axis.title      = element_text(size = 14))
+  theme(legend.position = c(0.25, 0.87),
+        legend.text     = element_text(size = 8),
+        axis.text       = element_text(size = 11),
+        axis.title      = element_text(size = 12))
 
 p_msm <- ggplot(msm_ce, aes(x = meanSoilMoisture, y = estimate__)) +
   geom_ribbon(aes(ymin = lower__, ymax = upper__), fill = "black", alpha = 0.25) +
@@ -428,9 +429,9 @@ p_ap <- ggplot(ap_ce, aes(x = AnnualPrecipitation, y = estimate__)) +
   theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
 
 fig_dorsal <- plot_grid(p_bs, p_vpd, p_msm, p_ap,
-                        labels = c("A", "B", "C", "D"), nrow = 2, ncol = 2)
+                        labels = c("B", "C", "D", "E"), nrow = 2, ncol = 2)
 ggsave("figureOutputs/bayes_dorsal_desiccation.png",
-       fig_dorsal, dpi = 450, width = 8, height = 8)
+       fig_dorsal, dpi = 450, width = 8, height = 7.5)
 
 # --- VENTRAL figures ---
 ap_ce_v  <- get_ce(bayes_ventral, "AnnualPrecipitation")
