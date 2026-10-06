@@ -407,8 +407,8 @@ p_vpd <- ggplot(int_ce_plot,
   theme_classic() +
   theme(legend.position = c(0.25, 0.87),
         legend.text     = element_text(size = 8),
-        axis.text       = element_text(size = 11),
-        axis.title      = element_text(size = 12))
+        axis.text       = element_text(size = 13),
+        axis.title      = element_text(size = 14))
 
 p_msm <- ggplot(msm_ce, aes(x = meanSoilMoisture, y = estimate__)) +
   geom_ribbon(aes(ymin = lower__, ymax = upper__), fill = "black", alpha = 0.25) +
@@ -447,7 +447,8 @@ p_bs_v <- ggplot(bs_ce_v, aes(x = MajorAxis_Dorsal, y = estimate__)) +
              alpha = 0.08) +
   labs(x = "Body size", y = "Ventral lightness") +
   theme_classic() +
-  theme(axis.text = element_text(size = 13), axis.title = element_text(size = 14))
+  theme(axis.text = element_text(size = 13), 
+        axis.title = element_text(size = 14))
 
 p_ap_v <- ggplot(ap_ce_v, aes(x = AnnualPrecipitation, y = estimate__)) +
   geom_ribbon(aes(ymin = lower__, ymax = upper__), fill = "black", alpha = 0.25) +
@@ -493,7 +494,7 @@ p_int_v <- ggplot(int_ce_plot_v,
   labs(x = "Soil moisture", y = "Ventral lightness",
        color = "Body size", fill = "Body size") +
   theme_classic() +
-  theme(legend.position = c(0.25, 0.90),
+  theme(legend.position = c(0.25, 0.85),
         legend.text     = element_text(size = 9),
         axis.text       = element_text(size = 12),
         axis.title      = element_text(size = 14))
